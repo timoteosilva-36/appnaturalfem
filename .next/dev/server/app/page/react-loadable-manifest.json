@@ -1,0 +1,10 @@
+{
+  "[project]/components/funnel.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/funnel.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/components_funnel_module_728ce782.css",
+      "static/chunks/components_646c1f94._.js",
+      "static/chunks/components_funnel_tsx_f73dfd91._.js"
+    ]
+  }
+}

@@ -11,6 +11,11 @@ export default function Funnel() {
   const [loadingFormula, setLoadingFormula] = useState(false)
 
   const handleLandingCTA = () => {
+    setCurrentScreen("personalization-arg")
+    window.scrollTo(0, 0)
+  }
+
+  const handlePersonalizationNext = () => {
     setCurrentScreen("quiz")
     window.scrollTo(0, 0)
   }
@@ -33,7 +38,7 @@ export default function Funnel() {
   }
 
   const getNextQuestion = (current) => {
-    const questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"]
+    const questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13", "q14", "q15"]
     const currentIndex = questions.indexOf(current)
     return questions[currentIndex + 1] || null
   }
@@ -52,18 +57,17 @@ export default function Funnel() {
     }
 
     if (data.name && data.email && data.phone) {
-      // Simulate checkout redirect
       setShowPopup(false)
       setCurrentScreen("success")
-
-      // In real scenario, this would redirect to checkout
-      // window.location.href = 'https://checkout.example.com'
     }
   }
 
   return (
     <div className={styles.funnel}>
       {currentScreen === "landing" && <LandingPage onCTA={handleLandingCTA} />}
+      
+      {currentScreen === "personalization-arg" && <PersonalizationArgument onNext={handlePersonalizationNext} />}
+      
       {currentScreen === "quiz" && <QuizPage onAnswer={handleQuizAnswer} />}
       {currentScreen === "quiz-q2" && <QuestionQ2 onAnswer={handleQuizAnswer} />}
       {currentScreen === "quiz-q3" && <QuestionQ3 onAnswer={handleQuizAnswer} />}
@@ -74,6 +78,12 @@ export default function Funnel() {
       {currentScreen === "quiz-q8" && <QuestionQ8 onAnswer={handleQuizAnswer} />}
       {currentScreen === "quiz-q9" && <QuestionQ9 onAnswer={handleQuizAnswer} />}
       {currentScreen === "quiz-q10" && <QuestionQ10 onAnswer={handleQuizAnswer} />}
+      
+      {currentScreen === "quiz-q11" && <QuestionQ11 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q12" && <QuestionQ12 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q13" && <QuestionQ13 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q14" && <QuestionQ14 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q15" && <QuestionQ15 onAnswer={handleQuizAnswer} />}
 
       {loadingFormula && <LoadingScreen />}
       {currentScreen === "results" && <ResultsPage onUnlock={handleUnlockFormula} quizAnswers={quizAnswers} />}
@@ -81,6 +91,80 @@ export default function Funnel() {
 
       {showPopup && <CapturePopup onClose={() => setShowPopup(false)} onSubmit={handleFormSubmit} />}
     </div>
+  )
+}
+
+function PersonalizationArgument({ onNext }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <div style={{ marginBottom: "2rem" }}>
+          <h2 className={styles.quizTitle}>Por que você PRECISA de uma fórmula personalizada</h2>
+          <p className={styles.quizSubtitle}>Entenda a ciência por trás da diferença</p>
+        </div>
+
+        {/* Personalization Comparison */}
+        <div style={{ marginBottom: "2rem", padding: "1.5rem", background: "#fff3cd", borderRadius: "12px", borderLeft: "4px solid #d946a0" }}>
+          <h3 style={{ fontSize: "1rem", fontWeight: "600", color: "#1a1a1a", marginBottom: "1rem" }}>
+            ❌ O Problema das Fórmulas Genéricas:
+          </h3>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ padding: "1rem", background: "#fff", borderRadius: "8px", borderLeft: "3px solid #ff6b6b" }}>
+              <strong style={{ display: "block", marginBottom: "0.5rem", color: "#1a1a1a" }}>Pessoa A: 28 anos, 65kg</strong>
+              <span style={{ fontSize: "0.85rem", color: "#666" }}>Metabolismo rápido, flora jovem, sem histórico de medicações</span>
+            </div>
+            <div style={{ padding: "1rem", background: "#fff", borderRadius: "8px", borderLeft: "3px solid #ff6b6b" }}>
+              <strong style={{ display: "block", marginBottom: "0.5rem", color: "#1a1a1a" }}>Pessoa B: 48 anos, 85kg</strong>
+              <span style={{ fontSize: "0.85rem", color: "#666" }}>Metabolismo lento, flora desbalanceada, uso prolongado de antibióticos</span>
+            </div>
+          </div>
+          <p style={{ fontSize: "0.9rem", color: "#555", marginTop: "1rem", lineHeight: "1.6" }}>
+            <strong>A mesma pomada funciona diferente para cada uma!</strong> A Pessoa A precisa de 50% de dosagem, a Pessoa B precisa de 200% + probióticos extras.
+          </p>
+        </div>
+
+        {/* Why Personalization Works */}
+        <div style={{ marginBottom: "2rem", padding: "1.5rem", background: "#e8f5e9", borderRadius: "12px", borderLeft: "4px solid #4caf50" }}>
+          <h3 style={{ fontSize: "1rem", fontWeight: "600", color: "#1b5e20", marginBottom: "1rem" }}>
+            ✓ Por que Nossa Fórmula é Diferente:
+          </h3>
+          <ul style={{ listStyle: "none", padding: "0", margin: "0", display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+            <li style={{ fontSize: "0.95rem", color: "#555" }}>
+              <strong>🔬 Idade:</strong> Metabolismo muda significativamente a cada 10 anos
+            </li>
+            <li style={{ fontSize: "0.95rem", color: "#555" }}>
+              <strong>⚖️ Peso:</strong> Gordura corporal afeta absorção de nutrientes
+            </li>
+            <li style={{ fontSize: "0.95rem", color: "#555" }}>
+              <strong>💊 Histórico:</strong> Antibióticos, pílulas, histórico familiar mudam sua flora
+            </li>
+            <li style={{ fontSize: "0.95rem", color: "#555" }}>
+              <strong>🧬 Genética:</strong> Algumas pessoas absorvem melhor certos componentes
+            </li>
+            <li style={{ fontSize: "0.95rem", color: "#555" }}>
+              <strong>🔄 Estilo de vida:</strong> Estresse, sono e alimentação influenciam a efetividade
+            </li>
+          </ul>
+        </div>
+
+        {/* Trust Box */}
+        <div style={{ marginBottom: "2rem", padding: "1rem", background: "rgba(217, 70, 160, 0.08)", borderRadius: "8px", borderLeft: "3px solid #d946a0" }}>
+          <p style={{ fontSize: "0.9rem", color: "#555", lineHeight: "1.6", margin: "0" }}>
+            <strong>💡 Por isso:</strong> Hospitais de ponta, universidades médicas e clínicas premium usam fórmulas personalizadas. Não é luxo — é <strong>ciência</strong>.
+          </p>
+        </div>
+
+        {/* CTA */}
+        <button 
+          className={styles.ctaButton}
+          onClick={onNext}
+          style={{ width: "100%" }}
+        >
+          <span className={styles.ctaText}>Vamos Descobrir MINHA Fórmula Personalizada</span>
+          <span className={styles.ctaSubtext}>Responda 15 perguntas rápidas → Resultado 100% customizado</span>
+        </button>
+      </div>
+    </section>
   )
 }
 
@@ -277,10 +361,10 @@ function QuizPage({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Vamos criar sua fórmula personalizada</h2>
-        <p className={styles.quizSubtitle}>Responda 10 perguntas rápidas</p>
+        <p className={styles.quizSubtitle}>Responda 15 perguntas rápidas</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "10%" }}></div>
+          <div className={styles.progressFill} style={{ width: "6.67%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -311,10 +395,10 @@ function QuestionQ2({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Quase lá! Deixe-me te conhecer</h2>
-        <p className={styles.quizSubtitle}>Pergunta 2 de 10</p>
+        <p className={styles.quizSubtitle}>Pergunta 2 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "20%" }}></div>
+          <div className={styles.progressFill} style={{ width: "13.33%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -351,14 +435,15 @@ function QuestionQ3({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Perfeito! Uma pergunta mais</h2>
-        <p className={styles.quizSubtitle}>Pergunta 3 de 10</p>
+        <p className={styles.quizSubtitle}>Pergunta 3 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "30%" }}></div>
+          <div className={styles.progressFill} style={{ width: "20%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
           <h3 className={styles.questionTitle}>Qual sua idade?</h3>
+          <p className={styles.questionSubtext}>Isso é crucial para calcular sua fórmula corretamente</p>
           <input
             type="number"
             className={styles.textInput}
@@ -381,29 +466,36 @@ function QuestionQ3({ onAnswer }) {
 }
 
 function QuestionQ4({ onAnswer }) {
+  const [weight, setWeight] = useState("")
+
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Estamos quase no seu resultado!</h2>
-        <p className={styles.quizSubtitle}>Pergunta 4 de 10</p>
+        <h2 className={styles.quizTitle}>Estamos montando seu perfil...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 4 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "40%" }}></div>
+          <div className={styles.progressFill} style={{ width: "26.67%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
-          <h3 className={styles.questionTitle}>Há quanto tempo sente esse problema?</h3>
-          <div className={styles.answerOptions}>
-            {[
-              { text: "Menos de 1 mês", id: "less1month" },
-              { text: "1 a 6 meses", id: "1to6months" },
-              { text: "Mais de 6 meses", id: "more6months" },
-            ].map((option) => (
-              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q4", option.id)}>
-                {option.text}
-              </button>
-            ))}
-          </div>
+          <h3 className={styles.questionTitle}>Qual seu peso (kg)?</h3>
+          <p className={styles.questionSubtext}>Peso afeta a absorção dos ativos naturais</p>
+          <input
+            type="number"
+            className={styles.textInput}
+            placeholder="Digite seu peso..."
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter" && weight) {
+                onAnswer("q4", weight)
+              }
+            }}
+          />
+          <button className={styles.answerButton} onClick={() => weight && onAnswer("q4", weight)} disabled={!weight}>
+            Continuar
+          </button>
         </div>
       </div>
     </section>
@@ -415,18 +507,20 @@ function QuestionQ5({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Sua fórmula está ficando mais precisa!</h2>
-        <p className={styles.quizSubtitle}>Pergunta 5 de 10</p>
+        <p className={styles.quizSubtitle}>Pergunta 5 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "50%" }}></div>
+          <div className={styles.progressFill} style={{ width: "33.33%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
-          <h3 className={styles.questionTitle}>Você usa anticoncepcional, pílula ou DIU?</h3>
+          <h3 className={styles.questionTitle}>Há quanto tempo sente esse problema?</h3>
           <div className={styles.answerOptions}>
             {[
-              { text: "Sim", id: "yes" },
-              { text: "Não", id: "no" },
+              { text: "Menos de 1 mês", id: "less1month" },
+              { text: "1 a 6 meses", id: "1to6months" },
+              { text: "6 meses a 1 ano", id: "6to12months" },
+              { text: "Mais de 1 ano (recorrente)", id: "more1year" },
             ].map((option) => (
               <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q5", option.id)}>
                 {option.text}
@@ -443,21 +537,22 @@ function QuestionQ6({ onAnswer }) {
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Conhecendo você melhor...</h2>
-        <p className={styles.quizSubtitle}>Pergunta 6 de 10</p>
+        <h2 className={styles.quizTitle}>40% do caminho!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 6 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "60%" }}></div>
+          <div className={styles.progressFill} style={{ width: "40%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
-          <h3 className={styles.questionTitle}>Você tem vida sexual ativa?</h3>
-          <p className={styles.questionSubtext}>Isso ajuda a personalizar sua fórmula</p>
+          <h3 className={styles.questionTitle}>Você usa anticoncepcional, pílula ou DIU?</h3>
+          <p className={styles.questionSubtext}>Hormônios sintéticos afetam a flora íntima</p>
           <div className={styles.answerOptions}>
             {[
-              { text: "Sim, ativamente", id: "yes_active" },
-              { text: "Sim, ocasionalmente", id: "yes_occasional" },
-              { text: "Não, atualmente não", id: "no" },
+              { text: "Sim, anticoncepcional oral", id: "oral_yes" },
+              { text: "Sim, DIU de cobre ou hormonal", id: "iud_yes" },
+              { text: "Sim, outro método hormonal", id: "other_hormonal" },
+              { text: "Não, nenhum método hormonal", id: "no" },
             ].map((option) => (
               <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q6", option.id)}>
                 {option.text}
@@ -474,22 +569,21 @@ function QuestionQ7({ onAnswer }) {
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Facilitando seu acesso...</h2>
-        <p className={styles.quizSubtitle}>Pergunta 7 de 10</p>
+        <h2 className={styles.quizTitle}>Conhecendo você melhor...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 7 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "70%" }}></div>
+          <div className={styles.progressFill} style={{ width: "46.67%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
-          <h3 className={styles.questionTitle}>Você consegue encontrar uma farmácia de manipulação perto de você?</h3>
-          <p className={styles.questionSubtext}>✓ Existem em praticamente todas as cidades</p>
+          <h3 className={styles.questionTitle}>Você tem vida sexual ativa?</h3>
+          <p className={styles.questionSubtext}>Isso muda os compostos que precisam estar na fórmula</p>
           <div className={styles.answerOptions}>
             {[
-              { text: "Sim, tenho várias perto", id: "yes_many" },
-              { text: "Sim, tenho pelo menos uma", id: "yes_one" },
-              { text: "Não, mas posso buscar online", id: "online" },
-              { text: "Não sei, mas vou procurar", id: "unsure" },
+              { text: "Sim, ativamente", id: "yes_active" },
+              { text: "Sim, ocasionalmente", id: "yes_occasional" },
+              { text: "Não, atualmente não", id: "no" },
             ].map((option) => (
               <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q7", option.id)}>
                 {option.text}
@@ -506,23 +600,22 @@ function QuestionQ8({ onAnswer }) {
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Última questão importante...</h2>
-        <p className={styles.quizSubtitle}>Pergunta 8 de 10</p>
+        <h2 className={styles.quizTitle}>Facilitando seu acesso...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 8 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "80%" }}></div>
+          <div className={styles.progressFill} style={{ width: "53.33%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
-          <h3 className={styles.questionTitle}>🔒 Você promete manter essa fórmula em total sigilo?</h3>
-          <p className={styles.questionSubtext}>
-            ⚠️ Estamos correndo risco de processos de consultórios que querem manter esse segredo. Por favor, seja discreta.
-          </p>
+          <h3 className={styles.questionTitle}>Você consegue encontrar uma farmácia de manipulação perto de você?</h3>
+          <p className={styles.questionSubtext}>✓ Existem em praticamente todas as cidades</p>
           <div className={styles.answerOptions}>
             {[
-              { text: "Sim, prometo manter em segredo", id: "yes_secret" },
-              { text: "Posso contar apenas para amigas próximas?", id: "close_friends" },
-              { text: "Vou contar para todos, desculpa!", id: "tell_all" },
+              { text: "Sim, tenho várias perto", id: "yes_many" },
+              { text: "Sim, tenho pelo menos uma", id: "yes_one" },
+              { text: "Não, mas posso buscar online", id: "online" },
+              { text: "Não sei, mas vou procurar", id: "unsure" },
             ].map((option) => (
               <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q8", option.id)}>
                 {option.text}
@@ -539,23 +632,23 @@ function QuestionQ9({ onAnswer }) {
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Você quer fazer parte de algo especial?</h2>
-        <p className={styles.quizSubtitle}>Pergunta 9 de 10</p>
+        <h2 className={styles.quizTitle}>Questão importante...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 9 de 15</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "90%" }}></div>
+          <div className={styles.progressFill} style={{ width: "60%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
-          <h3 className={styles.questionTitle}>Você se compromete em compartilhar seu testemunho de cura conosco?</h3>
+          <h3 className={styles.questionTitle}>🔒 Você promete manter essa fórmula em total sigilo?</h3>
           <p className={styles.questionSubtext}>
-            Suas histórias de sucesso ajudam outras mulheres. Queremos ouvir sua jornada! 💜
+            ⚠️ Estamos correndo risco de processos de consultórios que querem manter esse segredo. Por favor, seja discreta.
           </p>
           <div className={styles.answerOptions}>
             {[
-              { text: "Sim! Adoro compartilhar minhas vitórias", id: "yes_share" },
-              { text: "Talvez, depende dos resultados", id: "maybe_later" },
-              { text: "Prefiro manter privado", id: "private" },
+              { text: "Sim, prometo manter em segredo", id: "yes_secret" },
+              { text: "Posso contar apenas para amigas próximas?", id: "close_friends" },
+              { text: "Vou contar para todos, desculpa!", id: "tell_all" },
             ].map((option) => (
               <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q9", option.id)}>
                 {option.text}
@@ -572,8 +665,169 @@ function QuestionQ10({ onAnswer }) {
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Última questão - essa é especial!</h2>
-        <p className={styles.quizSubtitle}>Pergunta 10 de 10 - FINAL</p>
+        <h2 className={styles.quizTitle}>Estamos na metade!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 10 de 15</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "66.67%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você se compromete em compartilhar seu testemunho de cura conosco?</h3>
+          <p className={styles.questionSubtext}>
+            Suas histórias de sucesso ajudam outras mulheres. Queremos ouvir sua jornada! 💜
+          </p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim! Adoro compartilhar minhas vitórias", id: "yes_share" },
+              { text: "Talvez, depende dos resultados", id: "maybe_later" },
+              { text: "Prefiro manter privado", id: "private" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q10", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ11({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Personalizando ainda mais...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 11 de 15</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "73.33%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você já usou antibióticos nos últimos 6 meses?</h3>
+          <p className={styles.questionSubtext}>Antibióticos destroem a flora — sua fórmula precisa compensar isso</p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim, várias vezes", id: "multiple" },
+              { text: "Sim, uma ou duas vezes", id: "few_times" },
+              { text: "Não, nenhuma vez", id: "no_antibiotics" },
+              { text: "Não lembro com precisão", id: "unsure" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q11", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ12({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Quase lá!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 12 de 15</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "80%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Qual seu nível de stress/ansiedade?</h3>
+          <p className={styles.questionSubtext}>Stress e cortisol prejudicam a flora — fórmula precisa incluir adaptógenos</p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Muito alto - Preciso de urgência", id: "very_high" },
+              { text: "Alto - Interfere na minha vida", id: "high" },
+              { text: "Moderado - Consigo lidar", id: "moderate" },
+              { text: "Baixo - Estou bem", id: "low" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q12", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ13({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Ajustando sua fórmula...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 13 de 15</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "86.67%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você dorme bem e respira bem à noite?</h3>
+          <p className={styles.questionSubtext}>Sono ruim = imunidade baixa = fórmula precisa ser mais forte</p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim, durmo 7-8 horas bem", id: "good_sleep" },
+              { text: "Mais ou menos - 6 horas", id: "okay_sleep" },
+              { text: "Não - Insônia frequente", id: "poor_sleep" },
+              { text: "Vario muito", id: "varies" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q13", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ14({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Penúltima pergunta!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 14 de 15</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "93.33%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você pratica exercício físico?</h3>
+          <p className={styles.questionSubtext}>Atividade física impacta circulação e absorção dos nutrientes</p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim, 4+ vezes por semana", id: "very_active" },
+              { text: "Sim, 2-3 vezes por semana", id: "active" },
+              { text: "Ocasionalmente", id: "occasional" },
+              { text: "Não, vida sedentária", id: "sedentary" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q14", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ15({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Última pergunta - Essa é especial!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 15 de 15 - FINAL</p>
 
         <div className={styles.progressBar}>
           <div className={styles.progressFill} style={{ width: "100%" }}></div>
@@ -590,7 +844,7 @@ function QuestionQ10({ onAnswer }) {
               { text: "Sim, mas só o básico", id: "basic_yes" },
               { text: "Talvez depois", id: "later" },
             ].map((option) => (
-              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q10", option.id)}>
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q15", option.id)}>
                 {option.text}
               </button>
             ))}
@@ -610,7 +864,7 @@ function LoadingScreen() {
         <p className={styles.loadingText}>
           Nossa IA está gerando sua fórmula personalizada com base em seus dados específicos
         </p>
-        <p className={styles.loadingText2}>Istoé como os maiores centros médicos do mundo fazem</p>
+        <p className={styles.loadingText2}>Isso é como os maiores centros médicos do mundo fazem</p>
         <div className={styles.dotAnimation}>
           <span></span>
           <span></span>

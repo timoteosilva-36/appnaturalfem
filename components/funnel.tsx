@@ -51,20 +51,20 @@ export default function Funnel() {
     e.preventDefault()
     const formInputs = e.target.elements
     const data = {
-      name: formInputs.name?.value || "",
+      name: formInputs.firstname?.value || "",
+      lastname: formInputs.lastname?.value || "",
       email: formInputs.email?.value || "",
       phone: formInputs.phone?.value || "",
     }
 
-    if (data.name && data.email && data.phone) {
+    if (data.name && data.lastname && data.email && data.phone) {
       const perfectPayUrl = new URL("https://go.perfectpay.com.br/PPU38CP2MHH")
       
-      // Adicionar parâmetros de URL para pré-preenchimento
       perfectPayUrl.searchParams.append("name", data.name)
+      perfectPayUrl.searchParams.append("lastname", data.lastname)
       perfectPayUrl.searchParams.append("email", data.email)
       perfectPayUrl.searchParams.append("phone", data.phone)
       
-      // Redirecionar para o PerfectPay
       window.location.href = perfectPayUrl.toString()
     }
   }
@@ -164,6 +164,7 @@ function PersonalizationArgument({ onNext }) {
         {/* CTA */}
         <button 
           className={styles.ctaButton}
+          id="personalizationCtaBtn"
           onClick={onNext}
           style={{ width: "100%" }}
         >
@@ -305,7 +306,7 @@ function LandingPage({ onCTA }) {
           </div>
 
           {/* Main CTA Button */}
-          <button className={styles.ctaButton} onClick={onCTA}>
+          <button className={styles.ctaButton} id="heroMainCtaBtn" onClick={onCTA}>
             <span className={styles.ctaText}>Descobrir Minha Fórmula Personalizada</span>
             <span className={styles.ctaSubtext}>Teste gratuito → Resultado em 30 segundos</span>
           </button>
@@ -952,7 +953,7 @@ function ResultsPage({ onUnlock, quizAnswers }) {
           </ul>
         </div>
 
-        <button className={styles.unlockButton} onClick={onUnlock}>
+        <button className={styles.unlockButton} id="unlockFormulaBtn" onClick={onUnlock}>
           <span className={styles.unlockIcon}>💎</span>
           <span className={styles.unlockText}>Desbloquear minha fórmula agora - R$ 29,90</span>
         </button>
@@ -970,18 +971,47 @@ function CapturePopup({ onClose, onSubmit }) {
   return (
     <div className={styles.popupOverlay} onClick={onClose}>
       <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>
+        <button className={styles.closeButton} id="closePopupBtn" onClick={onClose}>
           ✕
         </button>
 
         <h2 className={styles.popupTitle}>Quase lá! Libere sua fórmula agora</h2>
         <p className={styles.popupSubtitle}>Preencha seus dados para acessar o checkout</p>
 
-        <form className={styles.popupForm} onSubmit={onSubmit}>
-          <input type="text" name="name" placeholder="Seu nome completo" className={styles.formInput} required />
-          <input type="email" name="email" placeholder="Seu melhor e-mail" className={styles.formInput} required />
-          <input type="tel" name="phone" placeholder="Seu telefone (WhatsApp)" className={styles.formInput} required />
-          <button type="submit" className={styles.submitButton}>
+        <form className={styles.popupForm} id="quizform" onSubmit={onSubmit}>
+          <input 
+            type="text" 
+            id="firstname"
+            name="firstname" 
+            placeholder="Seu nome" 
+            className={styles.formInput} 
+            required 
+          />
+          <input 
+            type="text" 
+            id="lastname"
+            name="lastname" 
+            placeholder="Seu sobrenome" 
+            className={styles.formInput} 
+            required 
+          />
+          <input 
+            type="email" 
+            id="email"
+            name="email" 
+            placeholder="Seu melhor e-mail" 
+            className={styles.formInput} 
+            required 
+          />
+          <input 
+            type="tel" 
+            id="phone"
+            name="phone" 
+            placeholder="Seu telefone (WhatsApp)" 
+            className={styles.formInput} 
+            required 
+          />
+          <button type="submit" id="checkoutSubmitBtn" className={styles.submitButton}>
             Acessar checkout e liberar minha fórmula →
           </button>
         </form>

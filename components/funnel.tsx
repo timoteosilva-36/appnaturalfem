@@ -57,8 +57,15 @@ export default function Funnel() {
     }
 
     if (data.name && data.email && data.phone) {
-      setShowPopup(false)
-      setCurrentScreen("success")
+      const perfectPayUrl = new URL("https://go.perfectpay.com.br/PPU38CP2MHH")
+      
+      // Adicionar parâmetros de URL para pré-preenchimento
+      perfectPayUrl.searchParams.append("name", data.name)
+      perfectPayUrl.searchParams.append("email", data.email)
+      perfectPayUrl.searchParams.append("phone", data.phone)
+      
+      // Redirecionar para o PerfectPay
+      window.location.href = perfectPayUrl.toString()
     }
   }
 
@@ -321,7 +328,7 @@ function LandingPage({ onCTA }) {
                 <span>- Carolina M., São Paulo</span>
               </div>
               <div className={styles.testimonial}>
-                <p>"Finalmente encontrei algo que funciona. Recomendo para todas as amigas!"</p>
+                <p>"Finalmente encontrei algo que funciona. Recomendo para todas as amigas próximas!"</p>
                 <span>- Juliana R., Rio de Janeiro</span>
               </div>
               <div className={styles.testimonial}>

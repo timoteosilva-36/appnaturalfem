@@ -33,7 +33,7 @@ export default function Funnel() {
   }
 
   const getNextQuestion = (current) => {
-    const questions = ["q1", "q2", "q3", "q4", "q5"]
+    const questions = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"]
     const currentIndex = questions.indexOf(current)
     return questions[currentIndex + 1] || null
   }
@@ -69,6 +69,11 @@ export default function Funnel() {
       {currentScreen === "quiz-q3" && <QuestionQ3 onAnswer={handleQuizAnswer} />}
       {currentScreen === "quiz-q4" && <QuestionQ4 onAnswer={handleQuizAnswer} />}
       {currentScreen === "quiz-q5" && <QuestionQ5 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q6" && <QuestionQ6 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q7" && <QuestionQ7 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q8" && <QuestionQ8 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q9" && <QuestionQ9 onAnswer={handleQuizAnswer} />}
+      {currentScreen === "quiz-q10" && <QuestionQ10 onAnswer={handleQuizAnswer} />}
 
       {loadingFormula && <LoadingScreen />}
       {currentScreen === "results" && <ResultsPage onUnlock={handleUnlockFormula} quizAnswers={quizAnswers} />}
@@ -157,11 +162,11 @@ function LandingPage({ onCTA }) {
             <h3 className={styles.solutionTitle}>✨ A Solução que Funciona de Verdade:</h3>
             <p className={styles.solutionText}>
               Uma <strong>fórmula 100% natural</strong> desenvolvida pela inteligência artificial combinada com{" "}
-              <strong>40+ anos de pesquisa de médicos naturistas internacionais</strong>.
+              <strong>40+ anos de pesquisa de médicos naturistas internacionais, baseados nos melhores e mais caros suplementos naturais que existem, isso de graça para você.</strong>.
             </p>
             <p className={styles.solutionText}>
               Não é uma pomada. É uma <strong>fórmula de restauração completa</strong> que você manipula em qualquer
-              farmácia de manipulação - a mesma que as celebridades e atrizes usam em Hollywood.
+              farmácia de manipulação - a mesma que as celebridades e atrizes usam em Hollywood. isso trata seu sistema inteiro, e não somente uma parte
             </p>
           </div>
 
@@ -172,7 +177,7 @@ function LandingPage({ onCTA }) {
               <div className={styles.benefit}>
                 <span className={styles.benefitNumber}>✓</span>
                 <div>
-                  <strong>Alívio em 3 dias</strong>
+                  <strong>Alívio em 2 dias</strong>
                   <p>Coceira e desconforto desaparecem rapidamente</p>
                 </div>
               </div>
@@ -194,7 +199,7 @@ function LandingPage({ onCTA }) {
                 <span className={styles.benefitNumber}>✓</span>
                 <div>
                   <strong>Fácil de usar</strong>
-                  <p>Manipulável em qualquer farmácia – custa menos que uma pomada</p>
+                  <p>Manipulável em qualquer farmácia – custa menos que uma pomada e você gasta menos que 1 minutos do seu dia para tratar</p>
                 </div>
               </div>
             </div>
@@ -203,7 +208,7 @@ function LandingPage({ onCTA }) {
           {/* Urgency & CTA */}
           <div className={styles.urgencyBox}>
             <p className={styles.urgencyText}>
-              ⏰ <strong>Atenção:</strong> Esta fórmula personalizada está disponível apenas através deste quiz. Sua
+              ⏰ <strong>Atenção:</strong> Esta fórmula personalizada está disponível apenas através deste site. Sua
               fórmula é criada especificamente para você com base em suas respostas.
             </p>
           </div>
@@ -211,7 +216,7 @@ function LandingPage({ onCTA }) {
           {/* Main CTA Button */}
           <button className={styles.ctaButton} onClick={onCTA}>
             <span className={styles.ctaText}>Descobrir Minha Fórmula Personalizada</span>
-            <span className={styles.ctaSubtext}>Teste gratuito → Resultado em 60 segundos</span>
+            <span className={styles.ctaSubtext}>Teste gratuito → Resultado em 30 segundos</span>
           </button>
 
           {/* Trust Elements */}
@@ -236,8 +241,12 @@ function LandingPage({ onCTA }) {
                 <span>- Juliana R., Rio de Janeiro</span>
               </div>
               <div className={styles.testimonial}>
-                <p>"Economizei R$ 800 em médicos e pomadas caras. Que descoberta!"</p>
+                <p>"Economizei R$800 em médicos e pomadas caras. Que descoberta!"</p>
                 <span>- Fernanda L., Belo Horizonte</span>
+              </div>
+              <div className={styles.testimonial}>
+                <p>"Descobri isso e tomo todo dia. Me ajudou até a emagrecer"</p>
+                <span>- Bruna S., Belo Horizonte</span>
               </div>
             </div>
           </div>
@@ -268,10 +277,10 @@ function QuizPage({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Vamos criar sua fórmula personalizada</h2>
-        <p className={styles.quizSubtitle}>Responda 5 perguntas rápidas</p>
+        <p className={styles.quizSubtitle}>Responda 10 perguntas rápidas</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "20%" }}></div>
+          <div className={styles.progressFill} style={{ width: "10%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -302,10 +311,10 @@ function QuestionQ2({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Quase lá! Deixe-me te conhecer</h2>
-        <p className={styles.quizSubtitle}>Pergunta 2 de 5</p>
+        <p className={styles.quizSubtitle}>Pergunta 2 de 10</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "40%" }}></div>
+          <div className={styles.progressFill} style={{ width: "20%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -342,10 +351,10 @@ function QuestionQ3({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Perfeito! Uma pergunta mais</h2>
-        <p className={styles.quizSubtitle}>Pergunta 3 de 5</p>
+        <p className={styles.quizSubtitle}>Pergunta 3 de 10</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "60%" }}></div>
+          <div className={styles.progressFill} style={{ width: "30%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -376,10 +385,10 @@ function QuestionQ4({ onAnswer }) {
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
         <h2 className={styles.quizTitle}>Estamos quase no seu resultado!</h2>
-        <p className={styles.quizSubtitle}>Pergunta 4 de 5</p>
+        <p className={styles.quizSubtitle}>Pergunta 4 de 10</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "80%" }}></div>
+          <div className={styles.progressFill} style={{ width: "40%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -405,11 +414,11 @@ function QuestionQ5({ onAnswer }) {
   return (
     <section className={styles.quiz}>
       <div className={styles.quizContainer}>
-        <h2 className={styles.quizTitle}>Última pergunta!</h2>
-        <p className={styles.quizSubtitle}>Pergunta 5 de 5</p>
+        <h2 className={styles.quizTitle}>Sua fórmula está ficando mais precisa!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 5 de 10</p>
 
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: "100%" }}></div>
+          <div className={styles.progressFill} style={{ width: "50%" }}></div>
         </div>
 
         <div className={styles.questionBox}>
@@ -420,6 +429,168 @@ function QuestionQ5({ onAnswer }) {
               { text: "Não", id: "no" },
             ].map((option) => (
               <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q5", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ6({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Conhecendo você melhor...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 6 de 10</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "60%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você tem vida sexual ativa?</h3>
+          <p className={styles.questionSubtext}>Isso ajuda a personalizar sua fórmula</p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim, ativamente", id: "yes_active" },
+              { text: "Sim, ocasionalmente", id: "yes_occasional" },
+              { text: "Não, atualmente não", id: "no" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q6", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ7({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Facilitando seu acesso...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 7 de 10</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "70%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você consegue encontrar uma farmácia de manipulação perto de você?</h3>
+          <p className={styles.questionSubtext}>✓ Existem em praticamente todas as cidades</p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim, tenho várias perto", id: "yes_many" },
+              { text: "Sim, tenho pelo menos uma", id: "yes_one" },
+              { text: "Não, mas posso buscar online", id: "online" },
+              { text: "Não sei, mas vou procurar", id: "unsure" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q7", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ8({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Última questão importante...</h2>
+        <p className={styles.quizSubtitle}>Pergunta 8 de 10</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "80%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>🔒 Você promete manter essa fórmula em total sigilo?</h3>
+          <p className={styles.questionSubtext}>
+            ⚠️ Estamos correndo risco de processos de consultórios que querem manter esse segredo. Por favor, seja discreta.
+          </p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim, prometo manter em segredo", id: "yes_secret" },
+              { text: "Posso contar apenas para amigas próximas?", id: "close_friends" },
+              { text: "Vou contar para todos, desculpa!", id: "tell_all" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q8", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ9({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Você quer fazer parte de algo especial?</h2>
+        <p className={styles.quizSubtitle}>Pergunta 9 de 10</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "90%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>Você se compromete em compartilhar seu testemunho de cura conosco?</h3>
+          <p className={styles.questionSubtext}>
+            Suas histórias de sucesso ajudam outras mulheres. Queremos ouvir sua jornada! 💜
+          </p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "Sim! Adoro compartilhar minhas vitórias", id: "yes_share" },
+              { text: "Talvez, depende dos resultados", id: "maybe_later" },
+              { text: "Prefiro manter privado", id: "private" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q9", option.id)}>
+                {option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function QuestionQ10({ onAnswer }) {
+  return (
+    <section className={styles.quiz}>
+      <div className={styles.quizContainer}>
+        <h2 className={styles.quizTitle}>Última questão - essa é especial!</h2>
+        <p className={styles.quizSubtitle}>Pergunta 10 de 10 - FINAL</p>
+
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: "100%" }}></div>
+        </div>
+
+        <div className={styles.questionBox}>
+          <h3 className={styles.questionTitle}>🎁 Você quer entrar no grupo VIP de mulheres que já se curaram?</h3>
+          <p className={styles.questionSubtext}>
+            Acesso exclusivo a: Suporte 24h, Dicas extras, Novas descobertas, Comunidade de apoio, Descontos futuros
+          </p>
+          <div className={styles.answerOptions}>
+            {[
+              { text: "SIM! Quero todos os benefícios VIP! 🌟", id: "vip_yes" },
+              { text: "Sim, mas só o básico", id: "basic_yes" },
+              { text: "Talvez depois", id: "later" },
+            ].map((option) => (
+              <button key={option.id} className={styles.answerButton} onClick={() => onAnswer("q10", option.id)}>
                 {option.text}
               </button>
             ))}

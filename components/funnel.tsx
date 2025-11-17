@@ -58,7 +58,7 @@ export default function Funnel() {
     }
 
     if (data.name && data.lastname && data.email && data.phone) {
-      const perfectPayUrl = new URL("https://go.perfectpay.com.br/PPU38CP2MHH")
+      const perfectPayUrl = new URL("https://go.perfectpay.com.br/PPU38CPSPUQ")
       
       perfectPayUrl.searchParams.append("name", data.name)
       perfectPayUrl.searchParams.append("lastname", data.lastname)
